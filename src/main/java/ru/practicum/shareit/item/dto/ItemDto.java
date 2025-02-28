@@ -8,12 +8,9 @@ import ru.practicum.shareit.user.model.User;
 /**
  * TODO Sprint add-controllers.
  */
-@Getter
-@Setter
-@ToString
-@EqualsAndHashCode
-@RequiredArgsConstructor
+@Data
 @Builder
+@RequiredArgsConstructor
 @AllArgsConstructor
 public class ItemDto {
     private Long id;

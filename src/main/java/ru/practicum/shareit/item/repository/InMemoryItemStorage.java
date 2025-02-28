@@ -4,8 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import ru.practicum.shareit.exeption.NotFoundException;
 import ru.practicum.shareit.item.model.Item;
-import ru.practicum.shareit.user.model.User;
-import ru.practicum.shareit.user.repository.UserStorage;
 
 import java.util.HashMap;
 import java.util.List;
@@ -16,20 +14,11 @@ import java.util.Map;
 public class InMemoryItemStorage implements ItemStorage {
 
     private final Map<Long, Item> items = new HashMap<>();
-    private final UserStorage userStorage;
     private Long id = 1L;
 
     @Override
     public Item createItem(Long userId, Item item) {
-        User owner = userStorage.getUser(userId);
-
-        if (item.getName() == null || item.getName().trim().isEmpty() ||
-                item.getDescription() == null || item.getDescription().trim().isEmpty()) {
-            throw new IllegalArgumentException("Поля name и description не могут быть пустыми");
-        }
-
         item.setId(id++);
-        item.setOwner(owner);
         items.put(item.getId(), item);
         return item;
     }
@@ -43,15 +32,9 @@ public class InMemoryItemStorage implements ItemStorage {
     public Item updateItem(Long userId, Long itemId, Item item) {
         Item updatedItem = getItemOrThrow(itemId);
 
-        if (item.getName() != null) {
-            updatedItem.setName(item.getName());
-        }
-        if (item.getDescription() != null) {
-            updatedItem.setDescription(item.getDescription());
-        }
-        if (item.getAvailable() != null) {
-            updatedItem.setAvailable(item.getAvailable());
-        }
+        updatedItem.setName(item.getName());
+        updatedItem.setDescription(item.getDescription());
+        updatedItem.setAvailable(item.getAvailable());
 
         items.put(itemId, updatedItem);
         return updatedItem;
