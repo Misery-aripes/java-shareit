@@ -1,0 +1,43 @@
+name: Custom API Tests
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  api-test:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:14
+        env:
+          POSTGRES_USER: admin
+          POSTGRES_PASSWORD: 1234
+          POSTGRES_DB: shareit
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U admin -d shareit"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+
+      - name: Start application
+        run: mvn spring-boot:run & # Запускаем сервер в фоне
+
+      - name: Wait for server
+        run: sleep 10 # Ждём 10 секунд, пока сервер запустится
+
+      - name: Run API tests
+        run: mvn clean test
