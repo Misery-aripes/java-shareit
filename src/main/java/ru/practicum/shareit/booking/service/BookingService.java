@@ -146,3 +146,4 @@ public class BookingService {
                 .orElseThrow(() -> new NotFoundException("Бронирование с таким id не найдено"));
     }
 }
+
