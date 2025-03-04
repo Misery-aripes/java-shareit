@@ -4,23 +4,15 @@ import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import ru.practicum.shareit.booking.enums.BookingStatus;
-import ru.practicum.shareit.item.model.Item;
-import ru.practicum.shareit.user.model.User;
 
 import java.time.LocalDateTime;
 
-/**
- * TODO Sprint add-bookings.
- */
 @Data
 @AllArgsConstructor
-public class BookingDto {
-    private Long id;
+public class BookingNewDto {
+
+    @NotNull
     private Long itemId;
-    private Item item;
-    private User booker;
-    private BookingStatus status;
 
     @Future
     @NotNull
