@@ -66,7 +66,6 @@
         </dependency>
     </dependencies>
 
-    Арсений Столетов, [04.03.2025 16:50]
     <build>
         <resources>
             <resource>
@@ -189,7 +188,6 @@
                                                 <counter>METHOD</counter>
                                                 <value>COVEREDRATIO</value>
 
-                                                Арсений Столетов, [04.03.2025 16:50]
                                                 <minimum>0.7</minimum>
                                             </limit>
                                             <limit>
