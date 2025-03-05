@@ -24,13 +24,11 @@ public class UserController {
     }
 
     @GetMapping("/{userId}")
-    @ResponseStatus(HttpStatus.OK)
     public UserDto getUser(@PathVariable Long userId) {
         return userService.getUser(userId);
     }
 
     @PatchMapping("/{userId}")
-    @ResponseStatus(HttpStatus.OK)
     public UserDto updateUser(@PathVariable Long userId,
                               @RequestBody UserDto userDto) {
         return userService.updateUser(userId, userDto);
