@@ -4,6 +4,8 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import ru.practicum.shareit.item.dto.CommentDto;
+import ru.practicum.shareit.item.dto.CommentNewDto;
 import ru.practicum.shareit.item.dto.ItemDto;
 import ru.practicum.shareit.item.service.ItemService;
 
@@ -27,14 +29,12 @@ public class ItemController {
     }
 
     @GetMapping("/{itemId}")
-    @ResponseStatus(HttpStatus.OK)
     public ItemDto getItem(@RequestHeader("X-Sharer-User-Id") Long userId,
                            @PathVariable Long itemId) {
         return itemService.getItem(userId, itemId);
     }
 
     @PatchMapping("/{itemId}")
-    @ResponseStatus(HttpStatus.OK)
     public ItemDto updateItem(@RequestHeader("X-Sharer-User-Id") Long userId,
                               @PathVariable Long itemId,
                               @RequestBody ItemDto itemDto) {
@@ -49,15 +49,20 @@ public class ItemController {
     }
 
     @GetMapping
-    @ResponseStatus(HttpStatus.OK)
     public List<ItemDto> getAllItems(@RequestHeader("X-Sharer-User-Id") Long userId) {
         return itemService.getAllItems(userId);
     }
 
     @GetMapping("/search")
-    @ResponseStatus(HttpStatus.OK)
-    public List<ItemDto> searchItems(@RequestHeader("X-Sharer-User-Id") Long userId,
-                                     @RequestParam(required = false) String text) {
-        return itemService.searchItems(userId, text);
+    public List<ItemDto> searchItems(@RequestParam(name = "text") String text) {
+        return itemService.searchItems(text);
+    }
+
+    @PostMapping("/{itemId}/comment")
+    @ResponseStatus(HttpStatus.CREATED)
+    public CommentDto addComment(@RequestHeader("X-Sharer-User-Id") Long userId,
+                                 @PathVariable Long itemId,
+                                 @Valid @RequestBody CommentNewDto commentDto) {
+        return itemService.addComment(userId, itemId, commentDto);
     }
 }
