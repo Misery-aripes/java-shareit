@@ -13,28 +13,26 @@ import java.util.List;
 public class ItemRequestController {
 
     private final ItemRequestService itemRequestService;
-    private static final String HEADER_USER_ID = "X-Sharer-User-Id";
 
     @PostMapping
-    public ItemRequestDto addItemRequest(@RequestHeader(HEADER_USER_ID) Long userId,
+    public ItemRequestDto addItemRequest(@RequestHeader("X-Sharer-User-Id") Long userId,
                                          @RequestBody ItemRequestDto itemRequestDto) {
         return itemRequestService.addItemRequest(userId, itemRequestDto);
     }
 
     @GetMapping("/all")
-    public List<ItemRequestDto> getAllRequests(@RequestHeader(HEADER_USER_ID) Long userId) {
+    public List<ItemRequestDto> getAllRequests(@RequestHeader("X-Sharer-User-Id") Long userId) {
         return itemRequestService.getAllRequests(userId);
     }
 
     @GetMapping
-    public List<ItemRequestDto> getAllUserRequests(@RequestHeader(HEADER_USER_ID) Long userId) {
+    public List<ItemRequestDto> getAllUserRequests(@RequestHeader("X-Sharer-User-Id") Long userId) {
         return itemRequestService.getAllUserRequests(userId);
     }
 
     @GetMapping("/{requestId}")
-    public ItemRequestDto getRequestById(@RequestHeader(HEADER_USER_ID) Long userId,
+    public ItemRequestDto getRequestById(@RequestHeader("X-Sharer-User-Id") Long userId,
                                          @PathVariable Long requestId) {
         return itemRequestService.getRequestById(userId, requestId);
     }
-
 }

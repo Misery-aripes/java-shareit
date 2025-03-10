@@ -12,7 +12,6 @@ import java.time.LocalDateTime;
 @RequiredArgsConstructor
 @Table(name = "requests")
 public class ItemRequest {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

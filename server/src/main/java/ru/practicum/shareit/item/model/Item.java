@@ -41,4 +41,3 @@ public class Item {
     @Transient
     private List<Comment> comments = new ArrayList<>();
 }
-

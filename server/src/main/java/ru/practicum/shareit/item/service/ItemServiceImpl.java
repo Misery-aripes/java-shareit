@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.shareit.booking.enums.BookingStatus;
 import ru.practicum.shareit.booking.model.Booking;
-import ru.practicum.shareit.repository.BookingRepository;
+import ru.practicum.shareit.booking.repository.BookingRepository;
 import ru.practicum.shareit.exceptions.NotFoundException;
 import ru.practicum.shareit.item.dto.CommentDto;
 import ru.practicum.shareit.item.dto.CommentNewDto;
@@ -52,7 +52,7 @@ public class ItemServiceImpl implements ItemService {
 
         itemRepository.save(item);
         return ItemMapper.toItemDto(item);
-        }
+    }
 
     @Override
     @Transactional
@@ -179,5 +179,4 @@ public class ItemServiceImpl implements ItemService {
         itemDto.setLastBooking(lastBooking);
         itemDto.setNextBooking(nextBooking);
     }
-
 }
