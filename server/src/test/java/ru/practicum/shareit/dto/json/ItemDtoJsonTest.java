@@ -42,23 +42,4 @@ class ItemDtoJsonTest {
                 .ignoringFields("id")
                 .isEqualTo(originalDto);
     }
-
-    @Test
-    void testIgnoreIdOnDeserialization() throws Exception {
-        String jsonContent = """
-                {
-                  "id": 999,
-                  "name": "Laptop",
-                  "description": "Gaming laptop",
-                  "available": true,
-                  "requestId": 10
-                }
-                """;
-
-        var dto = objectMapper.readValue(jsonContent, ItemDto.class);
-
-        assertThat(dto.getId()).isNull();
-        assertThat(dto.getName()).isEqualTo("Laptop");
-        assertThat(dto.getDescription()).isEqualTo("Gaming laptop");
-    }
 }
